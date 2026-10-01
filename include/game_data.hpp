@@ -35,13 +35,14 @@ struct Player {
 struct GameData {
     State state = State::Playing;
 
-    float gravity = 150.f;
+    static constexpr float maxGravity = 500.0f;
+    float gravity = 150.0f;
 
     Player player = {};
 
     static constexpr float minSpawnCooldown = 1.0f / 5.0f;
-    float spawnCooldown = 1.f;
-    float timeAccumulator = 0.f;
+    float spawnCooldown = 1.0f;
+    float timeAccumulator = 0.0f;
 
     std::vector<FallingBlock> blocks = {};
 };

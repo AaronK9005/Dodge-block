@@ -204,8 +204,8 @@ void Renderer::renderGameOver(const GameData& data, Gdiplus::Graphics& graphics)
 
     const wchar_t* lines[] = {
         std::format(L"score: {}", data.player.score).c_str(),
-        L"[q] quit",
-        L"[enter] play again"
+        L"[esc/Q] quit",
+        L"[R/enter] play again"
     };
 
     for (const auto* line : lines)

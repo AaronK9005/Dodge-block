@@ -53,7 +53,7 @@ LRESULT CALLBACK WindowProc( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam )
             inputMap->moveRight = true;
             break;
         case InputMap::TOGGLE_PAUSE:
-        case VK_ESCAPE:
+        case VK_TAB:
             // ignore auto repeat
             if (lParam & (1 << 30))
             {
@@ -62,6 +62,7 @@ LRESULT CALLBACK WindowProc( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam )
             inputMap->togglePause = true;
             break;
         case InputMap::QUIT:
+        case VK_ESCAPE:
             // ignore auto repeat
             if (lParam & (1 << 30))
             {
@@ -69,6 +70,7 @@ LRESULT CALLBACK WindowProc( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam )
             }
             inputMap->quit = true;
             break;
+        case InputMap::REPLAY:
         case VK_RETURN: // enter
             if (lParam & (1 << 30))
             {
@@ -90,13 +92,15 @@ LRESULT CALLBACK WindowProc( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam )
             inputMap->moveRight = false;
             break;
         case InputMap::TOGGLE_PAUSE:
-        case VK_ESCAPE:
+        case VK_TAB:
             inputMap->togglePause = false;
             break;
         case InputMap::QUIT:
+        case VK_ESCAPE:
             inputMap->quit = false;
             break;
-        case VK_RETURN:
+        case InputMap::REPLAY:
+        case VK_RETURN: // enter
             inputMap->enter = false;
             break;
         }

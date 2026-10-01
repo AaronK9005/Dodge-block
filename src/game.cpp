@@ -40,7 +40,7 @@ bool Game::handleInput(const InputMap& input)
 
     if (data.state == State::Gameover)
     {
-        if (input.enter)
+        if (input.replay)
         {
             data = {};
             secondsAccumulator = 0.0f;
@@ -83,12 +83,18 @@ void Game::update()
         return;
     }
 
-    // add score
+    // seconds timer
     secondsAccumulator += dt;
     if (secondsAccumulator >= 1.f)
     {
         secondsAccumulator -= 1.f;
         data.player.score += scorePerSecond;
+
+        data.gravity += 1.0f;
+        if (data.gravity > GameData::maxGravity)
+        {
+            data.gravity = GameData::maxGravity;
+        }
     }
 
     // update spawnCooldown and spawn blocks
