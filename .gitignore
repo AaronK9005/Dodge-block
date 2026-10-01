@@ -1,0 +1,6 @@
+build/*
+!build/block_dodge.exe
+
+.vscode/tasks.json
+
+botmain.*
