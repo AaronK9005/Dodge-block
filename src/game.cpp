@@ -40,7 +40,7 @@ bool Game::handleInput(const InputMap& input)
 
     if (data.state == State::Gameover)
     {
-        if (input.replay)
+        if (input.replay || input.enter)
         {
             data = {};
             secondsAccumulator = 0.0f;

@@ -71,6 +71,8 @@ LRESULT CALLBACK WindowProc( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam )
             inputMap->quit = true;
             break;
         case InputMap::REPLAY:
+            inputMap->replay = true;
+            break;
         case VK_RETURN: // enter
             if (lParam & (1 << 30))
             {
@@ -100,6 +102,8 @@ LRESULT CALLBACK WindowProc( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam )
             inputMap->quit = false;
             break;
         case InputMap::REPLAY:
+            inputMap->replay = false;
+            break;
         case VK_RETURN: // enter
             inputMap->enter = false;
             break;
