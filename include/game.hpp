@@ -15,6 +15,7 @@ class Game
     
     float dt = 0.f;
     float secondsAccumulator = 0.f;
+
     glm::ivec2 winSize = {800, 600}; // treshold, over which blocks should be destroyed
 
     // random

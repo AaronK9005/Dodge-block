@@ -3,8 +3,10 @@
 #include <windows.h>
 #include <gdiplus.h>
 #include <memory>
+#include <vector>
 
 #include "game_data.hpp"
+#include "draw_text_info.hpp"
 
 class Renderer
 {
@@ -35,8 +37,9 @@ class Renderer
 
     HWND hwnd_ = nullptr;
 
-    std::unique_ptr<Gdiplus::Bitmap> buffer = nullptr;
+    std::vector<DrawTextInfo> textDrawQueue{};
 
+    std::unique_ptr<Gdiplus::Bitmap> buffer = nullptr;
     int bufferWidth = 0;
     int bufferHeight = 0;
 
@@ -51,6 +54,6 @@ public:
     Renderer();
     ~Renderer();
     bool init(HWND hwnd);
-    // bool resize();
+    void drawText(const DrawTextInfo& textInfo);
     void render(const GameData& data);
 };

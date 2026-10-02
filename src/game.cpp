@@ -42,6 +42,7 @@ bool Game::handleInput(const InputMap& input)
     {
         if (input.replay || input.enter)
         {
+            end();
             data = {};
             secondsAccumulator = 0.0f;
             start();

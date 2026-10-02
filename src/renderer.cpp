@@ -55,6 +55,13 @@ void Renderer::render(const GameData& data)
         {
             renderGameOver(data, graphics);
         }
+
+        for (auto& text : textDrawQueue)
+        {
+            graphics.DrawString(text.wtext, -1, &font, text.posF, &whiteBrush);
+        }
+
+        textDrawQueue.clear();
     }
 
     HDC hdc = GetDC(hwnd_);
@@ -218,3 +225,7 @@ void Renderer::renderGameOver(const GameData& data, Gdiplus::Graphics& graphics)
     }
 }
 
+void Renderer::drawText(const DrawTextInfo& textInfo)
+{
+    textDrawQueue.emplace_back(textInfo);
+}

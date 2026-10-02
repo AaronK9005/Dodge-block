@@ -9,6 +9,7 @@
 #include "renderer.hpp"
 #include "input_map.hpp"
 #include "game.hpp"
+#include "fps_counter.hpp"
 
 class Application
 {
@@ -17,6 +18,7 @@ class Application
     Renderer renderer{};
     Game game{};
     InputMap inputMap{};
+    FpsCounter fpsCounter{};
     bool running = false;
 
 public:

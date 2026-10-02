@@ -53,6 +53,14 @@ void Application::run()
         // prevent huge dt
         deltaTime = std::min(deltaTime, 1.f / 6.f);
 
+        fpsCounter.update(deltaTime);
+        renderer.drawText(
+            DrawTextInfo(
+                std::format(L"fps: {}", fpsCounter.getFps()).c_str(),
+                {50.f, 100.f}
+            )
+        );
+
         game.obtainDeltaTime(deltaTime);
         if (!game.handleInput(inputMap))
         {
