@@ -173,6 +173,10 @@ Measures the approximate current frame rate and displays it during gameplay.
 │   ├── renderer.cpp
 │   └── window.cpp
 │
+├── images/
+│   ├── gameplay.png
+│   └── gameover.png
+|
 ├── build/
 │   └── block_dodge.exe
 │
@@ -190,7 +194,7 @@ This project currently targets Windows and requires:
 * GLM 1.0.3
 * GDI+ (included with Windows)
 
-GLM need to be installed/configured so that CMake can find them with `find_package()`.
+GLM needs to be installed/configured so that CMake can find them with `find_package()`.
 
 ## Building
 
