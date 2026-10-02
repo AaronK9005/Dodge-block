@@ -1,7 +1,6 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include <magic_enum/magic_enum.hpp>
 
 #include <vector>
 

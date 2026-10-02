@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <gdiplus.h>
 #include <iostream>
+#include <format>
 
 #include "application.hpp"
 #include "error_util.hpp"
