@@ -5,10 +5,6 @@
 Renderer::Renderer() {}
 Renderer::~Renderer() {}
 
-// bool Renderer::resize()
-// {
-
-// }
 bool Renderer::init(HWND hwnd)
 {
     if (!hwnd)
@@ -78,8 +74,6 @@ void Renderer::render(const GameData& data)
         );
     }
 
-    // InvalidateRect(hwnd_, nullptr, FALSE);
-
     ReleaseDC(hwnd_, hdc);
 }
 
@@ -87,8 +81,7 @@ bool Renderer::resizeBuffer(int widht, int height)
 {
     if (widht <= 0 || height <= 0)
     {
-        // minimizing will set widht & height to 0
-        return true;
+        return true; // true bc' minimizing will set widht & height to 0
     }
 
     auto new_buffer = std::make_unique<Gdiplus::Bitmap>(

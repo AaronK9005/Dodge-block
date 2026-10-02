@@ -10,6 +10,7 @@ class Game
 {
     static constexpr int startingBlocks = 1;
     static constexpr int scorePerSecond = 1;
+    static constexpr int scoreForDodged = 10;
 
     GameData data = {};
     
@@ -25,6 +26,7 @@ private:
     int randomInt(int min, int max);
     float randomFloat(float min, float max);
     void spawnBlock();
+    void perSecondUpdates();
 public:
     Game();
     ~Game();
@@ -34,6 +36,5 @@ public:
     bool handleInput(const InputMap& input);
     void update();
     const GameData& provideGameData() { return data; }
-    // void render(HWND hwnd);
     void end();
 };

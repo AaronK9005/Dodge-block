@@ -22,8 +22,6 @@ bool Application::init()
 
     game.receiveWindowSize(window.getWidth(), window.getHeight());
 
-    // std::cout << "Application '" << appName << "' started successfully" << std::endl;
-
     return true;
 }
 
@@ -69,7 +67,6 @@ void Application::run()
             break;
         }
         game.update();
-        // game.render(window.getWindow());
         renderer.render(game.provideGameData());
     }
 
@@ -79,5 +76,4 @@ void Application::run()
 
 void Application::shutdown()
 {
-    // std::cout << "Application '" << appName << "' ended" << std::endl;
 }

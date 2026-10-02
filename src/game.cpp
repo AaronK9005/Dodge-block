@@ -3,8 +3,6 @@
 #include <windows.h>
 #include <gdiplus.h>
 
-#include <iostream> // debug
-
 Game::Game()
     : gen(rd())
 {
@@ -84,32 +82,14 @@ void Game::update()
         return;
     }
 
-    // seconds timer
-    secondsAccumulator += dt;
-    if (secondsAccumulator >= 1.f)
-    {
-        secondsAccumulator -= 1.f;
-        data.player.score += scorePerSecond;
+    perSecondUpdates();
 
-        data.gravity += 1.0f;
-        if (data.gravity > GameData::maxGravity)
-        {
-            data.gravity = GameData::maxGravity;
-        }
-    }
-
-    // update spawnCooldown and spawn blocks
+    // spawn blocks
     data.timeAccumulator += dt;
     if (data.timeAccumulator >= data.spawnCooldown)
     {
         data.timeAccumulator -= data.spawnCooldown;
         spawnBlock();
-
-        data.spawnCooldown -= 0.05f;
-        if (data.spawnCooldown < GameData::minSpawnCooldown)
-        {
-            data.spawnCooldown = GameData::minSpawnCooldown;
-        }
     }
 
     for (size_t i = 0; i < data.blocks.size(); )
@@ -145,11 +125,10 @@ void Game::update()
             }
         }
 
+        // block fell out
         if (block.position.y >= winSize.y)
         {
-            // block fell out -> update score
-            // std::cout << "Block fell out. Current count: " << data.blocks.size() << std::endl;
-            data.player.score += 10;
+            data.player.score += scoreForDodged;
 
             data.blocks[i] = std::move(data.blocks.back());
             data.blocks.pop_back();
@@ -159,75 +138,6 @@ void Game::update()
         }
     }
 }
-
-/*
-void Game::render(HWND hwnd)
-{
-    HDC hdc = GetDC(hwnd);
-
-    Gdiplus::Graphics graphics(hdc);
-
-    graphics.Clear(Gdiplus::Color(255, 30, 30, 30));
-
-    // player
-    const Gdiplus::Color playerColor(255, 50, 200, 50);
-    Gdiplus::Pen playerPen(playerColor, 2.0f);
-    Gdiplus::SolidBrush playerBrush(playerColor);
-    graphics.FillRectangle(
-        &playerBrush,
-        data.player.position.x,
-        data.player.position.y,
-        data.player.size.x,
-        data.player.size.y
-    );
-    graphics.DrawRectangle(
-        &playerPen,
-        data.player.position.x,
-        data.player.position.y,
-        data.player.size.x,
-        data.player.size.y
-    );
-
-    // render blocks
-    const Gdiplus::Color blockColor(255, 200, 50, 50);
-    Gdiplus::Pen blockPen(blockColor, 2.0f);
-    Gdiplus::SolidBrush blockBrush(blockColor);
-
-    for (const FallingBlock& block : data.blocks)
-    {
-        graphics.FillRectangle(
-            &blockBrush,
-            block.position.x,
-            block.position.y,
-            block.size,
-            block.size
-        );
-
-        graphics.DrawRectangle(
-            &blockPen,
-            block.position.x,
-            block.position.y,
-            block.size,
-            block.size
-        );
-    }
-
-    // render score
-    Gdiplus::Font font(L"Arial", 24, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
-    Gdiplus::PointF scorePosF = {50.f, 50.f};
-    Gdiplus::SolidBrush whiteBrush(Gdiplus::Color(255, 255, 255, 255));
-
-    graphics.DrawString(
-        std::format(L"score: {}", data.player.score).c_str(),
-        -1,
-        &font,
-        scorePosF,
-        &whiteBrush
-    );
-
-    ReleaseDC(hwnd, hdc);
-}
-*/
 
 void Game::end()
 {
@@ -258,6 +168,27 @@ void Game::spawnBlock()
         size,
         randomFloat(0.9f, 1.5f)
     );
+}
 
-    // std::cout << "block spawned. Current count: " << data.blocks.size() << std::endl;
+void Game::perSecondUpdates()
+{
+    // seconds timer
+    secondsAccumulator += dt;
+    if (secondsAccumulator >= 1.f)
+    {
+        secondsAccumulator -= 1.f;
+        data.player.score += scorePerSecond;
+
+        data.gravity += 1.0f;
+        if (data.gravity > GameData::maxGravity)
+        {
+            data.gravity = GameData::maxGravity;
+        }
+
+        data.spawnCooldown -= 0.05f;
+        if (data.spawnCooldown < GameData::minSpawnCooldown)
+        {
+            data.spawnCooldown = GameData::minSpawnCooldown;
+        }
+    }
 }

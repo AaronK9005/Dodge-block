@@ -174,7 +174,7 @@ bool Window::init(InputMap& inputMap)
         0,
         CLASS_NAME,
         WINDOW_NAME,
-        style,// WS_OVERLAPPEDWINDOW,
+        style,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
         rect.right - rect.left,
