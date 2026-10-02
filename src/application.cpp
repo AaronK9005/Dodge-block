@@ -71,8 +71,6 @@ void Application::run()
         game.update();
         // game.render(window.getWindow());
         renderer.render(game.provideGameData());
-
-        Sleep(10);
     }
 
     game.end();
