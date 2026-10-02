@@ -243,7 +243,7 @@ The application uses a custom main loop rather than relying on `WM_PAINT` for co
 
 Current version:
 
-**v1.0.2**
+**v1.0.4**
 
 ## Assignment
 
